@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    
+    <h1>{{  familyname + name }}</h1>
+    <!-- v-model 双向绑定表单控件，表单控件的值改变，vue实例中data的值也会改变 -->
+    姓：<input type="text" v-model='familyname'>
+    <br>
+    名：<input type="text" v-model='name'>
+  </div>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        familyname:"",
+        name:""
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    
+    总价<h1>{{ unit_price * count }}</h1>
+    单价<input type="number" v-model='unit_price'><br>
+    <button v-on:click='sub()'>-</button><input type="number" v-model='count'><button v-on:click='add()'>+</button>
+  </div>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el:'#app',
+      data:{
+        count:1,
+        unit_price:1
+      },
+      // methods中的方法不要使用箭头函数，否则绑定的是window
+      methods:{
+        add:function(){
+          this.count++  
+        },
+        sub:function(){
+          if(this.count>0){
+            this.count--
+          }
+        }
+      }
+
+    })
+  </script>
+</body>
+</html>

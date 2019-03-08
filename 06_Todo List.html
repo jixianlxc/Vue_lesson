@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .done {
+      text-decoration: line-through;
+      color:darkgray;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Todo</h1>
+    <p>{{ todos.filter(item=>!item.done).length }} of {{todos.length}} remaing to [archive]</p>
+    <p v-for='(item,index) in todos'>
+      <input type="checkbox" v-model='item.done' >
+      <span v-bind:class='{done:item.done}'>{{ item.title }}</span>
+      <button @click='handleRemoveTodo(index)'>x</button>
+    </p>
+    <input type="text" v-model='todoText' v-on:keyup.enter='handleAddTodo'>
+    <button v-on:click='handleAddTodo'>Add</button>
+  </div>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script>
+    
+    const app = new Vue ({
+      el:'#app',
+      data:{
+        todoText:'',
+        doneTotal:0,
+        todos:[
+          {
+            id: 1,
+            title: '学习Vue',
+            done: false
+          },
+          {
+            id: 2,
+            title: '健身',
+            done: false
+          },
+          {
+            id: 3,
+            title: '阅读Node.js文档',
+            done: false
+          },
+          {
+            id: 4,
+            title: '更新博客',
+            done: false
+          } 
+        ]
+
+      },
+      methods:{
+        handleAddTodo () {
+          if(this.todoText){
+            this.todos.push({id:this.todos.length,title:this.todoText,done:false})
+          }else{
+            return
+          }
+          this.todoText = ''
+        },
+
+        handleRemoveTodo (index) {
+          this.todos.splice(index,1)
+        },
+        countDone () {
+          for(let i=0;i<this.todos.length;i++){
+            if(this.todos[i].done){
+              this.doneTotal++
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
